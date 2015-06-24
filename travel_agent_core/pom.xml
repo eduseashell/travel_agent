@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>edu.kwon.travelagent</groupId>
+		<artifactId>travel_agent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>edu.kwon.travelagent.core</groupId>
+	<artifactId>travel_agent_core</artifactId>
+	<name>Travel Agent Core Module</name>
+	
+	<dependencies>
+	
+		<!-- Spring framework core -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework-version}</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources/spring</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources/i18n</directory>
+			</resource>
+		</resources>
+	</build>
+	
+</project>

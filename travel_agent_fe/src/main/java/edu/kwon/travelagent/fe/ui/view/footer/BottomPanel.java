@@ -1,0 +1,62 @@
+package edu.kwon.travelagent.fe.ui.view.footer;
+
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
+
+import edu.kwon.frmk.vaadin.factory.VaadinFactory;
+import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+
+/**
+ * Page footer
+ * @author Bunlong Taing
+ * @since 0.0.1
+ * @version 0.0.1
+ */
+public class BottomPanel extends VerticalLayout {
+
+	private static final long serialVersionUID = 4837434762355321889L;
+	
+	private Image imgLogo;
+	private Label lblDesignAndBuild;
+	private Label lblCopyRight;
+	private Label lblVersion;
+	
+	public BottomPanel() {
+		super();
+		addStyleName(VaadinTheme.LAYOUT_BACKGROUND_WHITE);
+		setSpacing(false);
+		initGUI();
+	}
+	
+	private void initGUI() {
+		// TODO change the logo image
+		imgLogo = new Image(null, new ThemeResource("images/logo.jpg"));
+		imgLogo.setHeight(45, Unit.PIXELS);
+		
+		lblDesignAndBuild = VaadinFactory.getLabel("designed.and.built");
+		lblCopyRight = VaadinFactory.getLabel("copyright");
+		lblCopyRight.setSizeUndefined();
+		lblVersion = VaadinFactory.getLabel("version");
+		lblVersion.setSizeUndefined();
+		
+		HorizontalLayout horizontalLayout = new HorizontalLayout();
+		horizontalLayout.setSpacing(true);
+		horizontalLayout.addComponent(lblDesignAndBuild);
+		horizontalLayout.setComponentAlignment(lblDesignAndBuild, Alignment.MIDDLE_CENTER);
+		horizontalLayout.addComponent(imgLogo);
+		
+		addComponent(horizontalLayout);
+		addComponent(lblCopyRight);
+		addComponent(lblVersion);
+		addStyleName(VaadinTheme.LAYOUT_FOOTER);
+		
+		setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
+		setComponentAlignment(lblCopyRight, Alignment.MIDDLE_CENTER);
+		setComponentAlignment(lblVersion, Alignment.MIDDLE_CENTER);
+	}
+
+}
