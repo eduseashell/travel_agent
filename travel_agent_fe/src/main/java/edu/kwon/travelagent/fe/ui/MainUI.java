@@ -1,5 +1,7 @@
 package edu.kwon.travelagent.fe.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -20,18 +22,21 @@ import edu.kwon.travelagent.fe.ui.view.header.TopPanel;
  * @version 0.0.1
  */
 @Component
-@Scope("prototype")
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Theme(VaadinTheme.THEME_NAME)
 public class MainUI extends AbstractUI {
 
 	private static final long serialVersionUID = 5766722647521771460L;
+	
+	@Autowired
+	private TopPanel topPanel;
 
 	/**
 	 * @see edu.kwon.travelagent.core.ui.AbstractUI#buildTopPanel()
 	 */
 	@Override
 	protected VerticalLayout buildTopPanel() {
-		return new TopPanel();
+		return topPanel;
 	}
 
 	@Override

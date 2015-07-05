@@ -54,6 +54,7 @@ public class BaseLoginPanel extends AbstractLoginView {
 
         final TextField username = VaadinFactory.getTextField("user.name");
         username.setIcon(FontAwesome.USER);
+        username.focus();
 
         final PasswordField password = VaadinFactory.getPasswordField("password");
         password.setIcon(FontAwesome.LOCK);
@@ -61,7 +62,6 @@ public class BaseLoginPanel extends AbstractLoginView {
 
         final Button signin = VaadinFactory.getButtonPrimary("sign.in");
         signin.setClickShortcut(KeyCode.ENTER);
-        signin.focus();
 
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);

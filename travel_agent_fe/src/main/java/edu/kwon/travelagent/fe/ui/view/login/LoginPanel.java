@@ -4,14 +4,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import ru.xpoft.vaadin.VaadinView;
-
 import com.vaadin.server.Page;
-import com.vaadin.shared.Position;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 
 import edu.kwon.travelagent.fe.ui.MainUI;
+import ru.xpoft.vaadin.VaadinView;
 
 /**
  * Login Panel
@@ -37,14 +34,14 @@ public class LoginPanel extends BaseLoginPanel {
 			Page.getCurrent().setUriFragment("!" + MainUI.AFTER_LOG_IN_PANEL_NAME);
 		}
 		
-		String msg = "<span>Welcome " + user + " with password: " + password + " to the agency flight</span>";
-		Notification notification = new Notification("Welcome to Agency flight");
-        notification.setDescription(msg);
-        notification.setHtmlContentAllowed(true);
-        notification.setDelayMsec(3000);
-        notification.setStyleName("tray dark small closable login-help");
-        notification.setPosition(Position.BOTTOM_CENTER);
-        notification.show(Page.getCurrent());
+//		String msg = "<span>Welcome " + user + " with password: " + password + " to the agency flight</span>";
+//		Notification notification = new Notification("Welcome to Agency flight");
+//        notification.setDescription(msg);
+//        notification.setHtmlContentAllowed(true);
+//        notification.setDelayMsec(3000);
+//        notification.setStyleName("tray dark small closable login-help");
+//        notification.setPosition(Position.BOTTOM_CENTER);
+//        notification.show(Page.getCurrent());
 	}
 
 }

@@ -1,5 +1,6 @@
 package edu.kwon.travelagent.fe.ui.view.header;
 
+import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.travelagent.core.ui.menu.AbstractMenuBar;
 import edu.kwon.travelagent.fe.ui.view.dashboard.DashboardPanel;
@@ -15,13 +16,16 @@ import edu.kwon.travelagent.fe.ui.view.login.LoginPanel;
 public class TAFEMenu extends AbstractMenuBar {
 	
 	private static final long serialVersionUID = -4241661350709674394L;
+	
+	private I18N i18n;
 
 	/**
 	 * Build menu
 	 */
 	protected void buildMenu() {
-		MenuItem users = addItem(I18N.string("TAFEMenu.users"), null);
-		users.addItem(I18N.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
+		i18n = AppContext.getBean(I18N.class);
+		MenuItem users = addItem(i18n.string("TAFEMenu.users"), null);
+		users.addItem(i18n.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
 		users.addItem("Open", new MenuCommand(LoginPanel.NAME));
 		users.addItem("Exit", null);
 		

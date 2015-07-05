@@ -15,12 +15,12 @@
 		<vaadin.version>7.4.5</vaadin.version>
 		<vaadin.spring.integration>3.1</vaadin.spring.integration>
 		<slf4j.version>1.7.12</slf4j.version>
-		<serlet.api.version>2.5</serlet.api.version>
+		<serlet.api.version>3.1.0</serlet.api.version>
 		<spring-framework-version>4.1.6.RELEASE</spring-framework-version>
 
 		<frmk-version>0.0.1-SNAPSHOT</frmk-version>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>vaadin-addons</id>
@@ -62,9 +62,14 @@
 		</dependency>
 
 		<!-- Servlet -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
+			<version>${serlet.api.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${serlet.api.version}</version>
 		</dependency>
 
@@ -77,6 +82,11 @@
 		<dependency>
 			<groupId>edu.kwon.frmk</groupId>
 			<artifactId>frmk-common-share</artifactId>
+			<version>${frmk-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.kwon.common</groupId>
+			<artifactId>frmk-common-data</artifactId>
 			<version>${frmk-version}</version>
 		</dependency>
 
