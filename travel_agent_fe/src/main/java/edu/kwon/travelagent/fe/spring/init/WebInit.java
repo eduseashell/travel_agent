@@ -12,8 +12,8 @@ import org.springframework.web.servlet.support.AbstractDispatcherServletInitiali
 
 import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.travelagent.core.config.ConfigParam;
-import edu.kwon.travelagent.fe.spring.config.AppDataConfig;
-import edu.kwon.travelagent.fe.spring.config.ApplicationMainContext;
+import edu.kwon.travelagent.fe.spring.config.profiledefault.AppDataConfig;
+import edu.kwon.travelagent.fe.spring.config.profiledefault.ApplicationMainContext;
 import ru.xpoft.vaadin.SpringVaadinServlet;
 
 /**
@@ -35,6 +35,7 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 		
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(configClasses);
+		rootContext.getEnvironment().setDefaultProfiles(ConfigParam.APP_PROFILE_DEFAULT);
 		rootContext.refresh();
 		
 		// Set the context for using in the application
@@ -80,7 +81,9 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setInitParameter("beanName", "mainUI");
 		registration.setInitParameter("contextConfigLocation", ConfigParam.VAADIN_CONTEXT_CONFIG_LOCATION);
-		registration.setInitParameter("productionMode", "false");
+		registration.setInitParameter("productionMode", "true");
+		registration.setInitParameter("spring.profiles.default", ConfigParam.APP_PROFILE_DEFAULT);
+//		registration.setInitParameter("spring.profiles.active", "");
 	}
 	
 }

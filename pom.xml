@@ -46,6 +46,11 @@
 			<artifactId>vaadin-themes</artifactId>
 			<version>${vaadin.version}</version>
 		</dependency>
+		<!-- <dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<version>${vaadin.version}</version>
+		</dependency> -->
 
 		<!-- Spring Vaadin integration -->
 		<dependency>
@@ -85,7 +90,7 @@
 			<version>${frmk-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.kwon.common</groupId>
+			<groupId>edu.kwon.frmk</groupId>
 			<artifactId>frmk-common-data</artifactId>
 			<version>${frmk-version}</version>
 		</dependency>

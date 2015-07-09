@@ -3,6 +3,10 @@ package edu.kwon.travelagent.core.config;
 public class ConfigParam {
 	
 	// Application configuration
+	public static final String APP_PROFILE_DEFAULT = "default";
+	public static final String APP_PROFILE_DEV = "development";
+	public static final String APP_PROFILE_PRO = "production";
+	
 	public static final String APP_CONFIG_LOCATION_RAW = "application.properties";
 	public static final String APP_CONFIG_LOCATION = "classpath:" + APP_CONFIG_LOCATION_RAW;
 	public static final String JPA_REPO_BASE_PACKAGE = "edu.kwon.frmk.common.data.jpa.repository";

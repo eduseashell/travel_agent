@@ -66,6 +66,7 @@ public abstract class AbstractUI extends UI implements ViewChangeListener {
 	
 	private void initControls() {
 		topPanelHolder = new VerticalLayout();
+		topPanelHolder.setHeightUndefined();
 		mainPanelHolder = new VerticalLayout();
 		mainPanelHolder.setSizeFull();
 		bottomPanelHolder = new VerticalLayout();

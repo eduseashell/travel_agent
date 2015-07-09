@@ -45,23 +45,44 @@
 		</resources>
 
 		<plugins>
-			<!-- Web Resources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<webResources>
+				
+					<!-- Web Resources -->
+					<!-- Not work when compile vaadin theme -->
+					<!-- <webResources>
 						<resource>
-							<!-- this is relative to the pom.xml directory -->
+							this is relative to the pom.xml directory
 							<directory>src/main/resources/themes</directory>
 						</resource>
-					</webResources>
+					</webResources> -->
 					
 					<!-- Exclude Web.xml -->
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			
+			<!-- Vaadin plugin for compile theme -->
+			<!-- <plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>clean</goal>
+							<goal>resources</goal>
+							<goal>update-theme</goal>
+							<goal>update-widgetset</goal>
+							<goal>compile-theme</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
 		</plugins>
 
 	</build>

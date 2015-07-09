@@ -1,9 +1,11 @@
 package edu.kwon.travelagent.fe.ui.view.header;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -29,10 +31,19 @@ public class TopPanel extends VerticalLayout {
 	
 	private Image imgLogo;
 	
+	@Autowired
+	private TAFEMenu menu;
+	
 	public TopPanel() {
 		super();
 		addStyleName(VaadinTheme.LAYOUT_BACKGROUND_WHITE);
 		setSpacing(false);
+	}
+	
+	/**
+	 * Post Contruct
+	 */
+	public void PostContruct() {
 		initGUI();
 	}
 	
@@ -40,22 +51,22 @@ public class TopPanel extends VerticalLayout {
 	 * Init GUI component of top panel
 	 */
 	private void initGUI() {
-		
-		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setMargin(true);
-		horizontalLayout.addComponent(buildBand());
+		horizontalLayout.addComponent(buildBrand());
+		horizontalLayout.addComponent(menu);
+		horizontalLayout.setComponentAlignment(menu, Alignment.MIDDLE_LEFT);
 		
 		addComponent(horizontalLayout);
-		addComponent(new TAFEMenu());
 	}
 	
-	private ComponentContainer buildBand() {
-		imgLogo = VaadinFactory.getImage(AppConfig.getProperties(PropertiesParam.APP_LOGO), "Company Logo");
+	private ComponentContainer buildBrand() {
+		imgLogo = VaadinFactory.getImage(AppConfig.getConfigValue(PropertiesParam.APP_LOGO), "Company Logo");
 		imgLogo.setHeight(45, Unit.PIXELS);
 		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
+		horizontalLayout.addComponent(imgLogo);
 		
 		return horizontalLayout;
 	}

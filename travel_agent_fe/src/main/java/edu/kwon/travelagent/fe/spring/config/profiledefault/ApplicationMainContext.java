@@ -1,19 +1,15 @@
-package edu.kwon.travelagent.fe.spring.config;
+package edu.kwon.travelagent.fe.spring.config.profiledefault;
 
-import java.io.IOException;
 import java.util.Locale;
-import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.travelagent.core.config.ConfigParam;
@@ -27,6 +23,7 @@ import edu.kwon.travelagent.core.config.PropertiesParam;
  * @since 0.0.1
  * @version 0.0.1
  */
+@Profile(ConfigParam.APP_PROFILE_DEFAULT)
 @Configuration
 @PropertySource(ConfigParam.APP_CONFIG_LOCATION)
 public class ApplicationMainContext {
@@ -66,11 +63,11 @@ public class ApplicationMainContext {
 		return i18n;
 	}
 	
-	@Bean
-	public Properties pros() throws IOException {
-		Resource resource = new ClassPathResource(ConfigParam.APP_CONFIG_LOCATION_RAW);
-		Properties pros = PropertiesLoaderUtils.loadProperties(resource);
-		return pros;
-	}
+//	@Bean
+//	public Properties pros() throws IOException {
+//		Resource resource = new ClassPathResource(ConfigParam.APP_CONFIG_LOCATION_RAW);
+//		Properties pros = PropertiesLoaderUtils.loadProperties(resource);
+//		return pros;
+//	}
 
 }

@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.fe.spring.config;
+package edu.kwon.travelagent.fe.spring.config.profiledefault;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -7,6 +7,7 @@ import org.hibernate.dialect.PostgresPlusDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -31,6 +32,7 @@ import edu.kwon.travelagent.core.config.PropertiesParam;
  * @since 0.0.1
  * @version 0.0.1
  */
+@Profile(ConfigParam.APP_PROFILE_DEFAULT)
 @Configuration
 @EnableJpaRepositories(ConfigParam.JPA_REPO_BASE_PACKAGE)			// Package of annotated class is used, if not specify base package. repository-impl-postfix = (default) Impl
 @EnableTransactionManagement										// = <tx:annotation-driven />
