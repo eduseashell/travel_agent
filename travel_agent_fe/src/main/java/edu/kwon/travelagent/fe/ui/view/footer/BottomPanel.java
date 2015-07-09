@@ -1,6 +1,9 @@
 package edu.kwon.travelagent.fe.ui.view.footer;
 
-import com.vaadin.server.ThemeResource;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -9,6 +12,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
 import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
 
 /**
  * Page footer
@@ -16,6 +20,8 @@ import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
  * @since 0.0.1
  * @version 0.0.1
  */
+@Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class BottomPanel extends VerticalLayout {
 
 	private static final long serialVersionUID = 4837434762355321889L;
@@ -33,8 +39,7 @@ public class BottomPanel extends VerticalLayout {
 	}
 	
 	private void initGUI() {
-		// TODO change the logo image
-		imgLogo = new Image(null, new ThemeResource("images/logo.jpg"));
+		imgLogo = VaadinFactory.getImage(FeAppConfig.getAppLogo(), "app.com.logo.text");
 		imgLogo.setHeight(45, Unit.PIXELS);
 		
 		lblDesignAndBuild = VaadinFactory.getLabel("designed.and.built");

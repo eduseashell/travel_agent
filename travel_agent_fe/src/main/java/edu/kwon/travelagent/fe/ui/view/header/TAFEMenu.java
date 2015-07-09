@@ -22,7 +22,7 @@ import edu.kwon.travelagent.fe.ui.view.login.LoginPanel;
 public class TAFEMenu extends AbstractMenuBar {
 	
 	private static final long serialVersionUID = -4241661350709674394L;
-	
+
 	private I18N i18n;
 
 	/**
@@ -32,6 +32,7 @@ public class TAFEMenu extends AbstractMenuBar {
 		i18n = AppContext.getBean(I18N.class);
 		MenuItem users = addItem(i18n.string("TAFEMenu.users"), null);
 		users.addItem(i18n.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
+		
 		users.addItem("Open", new MenuCommand(LoginPanel.NAME));
 		users.addItem("Exit", null);
 		

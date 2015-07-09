@@ -1,5 +1,7 @@
 package edu.kwon.travelagent.fe.ui.view.header;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -9,12 +11,13 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
-import edu.kwon.frmk.common.share.spring.util.AppConfig;
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
-import edu.kwon.travelagent.core.config.PropertiesParam;
 import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
 
 /**
  * The page Top panel which contains header infomation
@@ -29,10 +32,11 @@ public class TopPanel extends VerticalLayout {
 
 	private static final long serialVersionUID = -6431393804362388676L;
 	
-	private Image imgLogo;
-	
 	@Autowired
 	private TAFEMenu menu;
+	
+	private Image imgLogo;
+	private Label lblAppName;
 	
 	public TopPanel() {
 		super();
@@ -43,6 +47,7 @@ public class TopPanel extends VerticalLayout {
 	/**
 	 * Post Contruct
 	 */
+	@PostConstruct
 	public void PostContruct() {
 		initGUI();
 	}
@@ -61,11 +66,17 @@ public class TopPanel extends VerticalLayout {
 	}
 	
 	private ComponentContainer buildBrand() {
-		imgLogo = VaadinFactory.getImage(AppConfig.getConfigValue(PropertiesParam.APP_LOGO), "Company Logo");
+		lblAppName = VaadinFactory.getLabel("app.name");
+		lblAppName.addStyleName(ValoTheme.LABEL_H1);
+		lblAppName.addStyleName(ValoTheme.LABEL_BOLD);
+		lblAppName.addStyleName(ValoTheme.LABEL_COLORED);
+		lblAppName.addStyleName(ValoTheme.LABEL_NO_MARGIN);
+		imgLogo = VaadinFactory.getImage(FeAppConfig.getAppLogo(), "app.com.logo.text");
 		imgLogo.setHeight(45, Unit.PIXELS);
 		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
+		horizontalLayout.addComponent(lblAppName);
 		horizontalLayout.addComponent(imgLogo);
 		
 		return horizontalLayout;

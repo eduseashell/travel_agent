@@ -36,7 +36,8 @@ import edu.kwon.travelagent.core.config.PropertiesParam;
 @Configuration
 @EnableJpaRepositories(ConfigParam.JPA_REPO_BASE_PACKAGE)			// Package of annotated class is used, if not specify base package. repository-impl-postfix = (default) Impl
 @EnableTransactionManagement										// = <tx:annotation-driven />
-@PropertySource(ConfigParam.APP_CONFIG_LOCATION)
+@PropertySource(value = ConfigParam.APP_CONFIG_PROPERTIES, ignoreResourceNotFound = true)
+@PropertySource(value = ConfigParam.APP_PROFILE_DEFAULT_PROPERTIES, ignoreResourceNotFound = false)
 public class AppDataConfig {
 	
 	@Value(PropertiesParam.DATABASE_URL)
@@ -90,7 +91,6 @@ public class AppDataConfig {
 		vendorAdapter.setShowSql(true);
 		vendorAdapter.setGenerateDdl(true);
 		vendorAdapter.setDatabasePlatform(PostgresPlusDialect.class.getName());
-		
 		return vendorAdapter;
 	}
 	

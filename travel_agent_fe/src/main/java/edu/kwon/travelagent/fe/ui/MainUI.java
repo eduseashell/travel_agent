@@ -30,6 +30,8 @@ public class MainUI extends AbstractUI {
 	
 	@Autowired
 	private TopPanel topPanel;
+	@Autowired
+	private BottomPanel bottomPanel;
 
 	/**
 	 * @see edu.kwon.travelagent.core.ui.AbstractUI#buildTopPanel()
@@ -46,7 +48,7 @@ public class MainUI extends AbstractUI {
 	
 	@Override
 	protected VerticalLayout buildBottomPanel() {
-		return new BottomPanel();
+		return bottomPanel;
 	}
 
 	@Override

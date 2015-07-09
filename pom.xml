@@ -17,6 +17,9 @@
 		<slf4j.version>1.7.12</slf4j.version>
 		<serlet.api.version>3.1.0</serlet.api.version>
 		<spring-framework-version>4.1.6.RELEASE</spring-framework-version>
+		
+		<build-version>1.8</build-version>
+		<build-encoding>UTF-8</build-encoding>
 
 		<frmk-version>0.0.1-SNAPSHOT</frmk-version>
 	</properties>
@@ -96,4 +99,27 @@
 		</dependency>
 
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${build-version}</source>
+					<target>${build-version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<encoding>${build-encoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

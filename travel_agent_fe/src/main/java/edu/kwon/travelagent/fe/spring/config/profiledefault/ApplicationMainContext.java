@@ -25,7 +25,8 @@ import edu.kwon.travelagent.core.config.PropertiesParam;
  */
 @Profile(ConfigParam.APP_PROFILE_DEFAULT)
 @Configuration
-@PropertySource(ConfigParam.APP_CONFIG_LOCATION)
+@PropertySource(value = ConfigParam.APP_CONFIG_PROPERTIES, ignoreResourceNotFound = true)
+@PropertySource(value = ConfigParam.APP_PROFILE_DEFAULT_PROPERTIES, ignoreResourceNotFound = false)
 public class ApplicationMainContext {
 	
 	@Value(PropertiesParam.APP_MESSAGE_FILE_NAME)
