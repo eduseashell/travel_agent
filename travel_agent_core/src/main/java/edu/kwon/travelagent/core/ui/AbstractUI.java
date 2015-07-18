@@ -49,7 +49,6 @@ public abstract class AbstractUI extends UI implements ViewChangeListener {
 		mainPanel = buildMainPanel();
 		DiscoveryNavigator navigator;
 		if (mainPanel == null) {
-//			mainPanel.setSizeFull();
 			navigator = new DiscoveryNavigator(this, mainPanel);
 		} else {
 			navigator = new DiscoveryNavigator(this, mainPanelHolder);

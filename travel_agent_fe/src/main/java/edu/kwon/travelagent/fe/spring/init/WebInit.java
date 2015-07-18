@@ -36,7 +36,7 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(configClasses);
 		rootContext.getEnvironment().setDefaultProfiles(ConfigParam.APP_PROFILE_DEFAULT);
-		rootContext.refresh();
+//		rootContext.refresh();
 		
 		// Set the context for using in the application
 		AppContext.setAppContext(rootContext);
@@ -45,7 +45,6 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	
 	@Override
 	protected WebApplicationContext createServletApplicationContext() {
-		
 		return null;
 	}
 

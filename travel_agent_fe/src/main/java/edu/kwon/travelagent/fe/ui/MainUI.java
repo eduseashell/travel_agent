@@ -5,7 +5,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -24,6 +26,8 @@ import edu.kwon.travelagent.fe.ui.view.header.TopPanel;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Theme(VaadinTheme.THEME_NAME)
+@PreserveOnRefresh
+@Title("Travel Agent")
 public class MainUI extends AbstractUI {
 
 	private static final long serialVersionUID = 5766722647521771460L;
@@ -39,11 +43,6 @@ public class MainUI extends AbstractUI {
 	@Override
 	protected VerticalLayout buildTopPanel() {
 		return topPanel;
-	}
-
-	@Override
-	protected VerticalLayout buildMainPanel() {
-		return new VerticalLayout();
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package edu.kwon.travelagent.fe.spring.config.profiledefault;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -60,10 +62,18 @@ public class AppDataConfig {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource());
 		factory.setJpaVendorAdapter(jpaVendorAdapter());
+		factory.setJpaProperties(hibernateProperties());
 		factory.setPackagesToScan(ConfigParam.ENTITY_PACKAGE_TO_SCAN);
 		factory.afterPropertiesSet();
 		
 		return factory.getObject();
+	}
+	
+	public Properties hibernateProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		return properties;
 	}
 	
 	@Bean
@@ -87,9 +97,14 @@ public class AppDataConfig {
 	
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
+//		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter() {
+//			{
+//				// JPA properties ...
+//			}
+//		};
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setShowSql(true);
-		vendorAdapter.setGenerateDdl(true);
+//		vendorAdapter.setShowSql(true);
+//		vendorAdapter.setGenerateDdl(true);
 		vendorAdapter.setDatabasePlatform(PostgresPlusDialect.class.getName());
 		return vendorAdapter;
 	}
