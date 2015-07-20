@@ -58,6 +58,7 @@ public class TopPanel extends VerticalLayout {
 	private void initGUI() {
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setMargin(true);
+		horizontalLayout.setSpacing(true);
 		horizontalLayout.addComponent(buildBrand());
 		horizontalLayout.addComponent(menu);
 		horizontalLayout.setComponentAlignment(menu, Alignment.MIDDLE_LEFT);
@@ -76,8 +77,8 @@ public class TopPanel extends VerticalLayout {
 		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
-		horizontalLayout.addComponent(lblAppName);
 		horizontalLayout.addComponent(imgLogo);
+		horizontalLayout.addComponent(lblAppName);
 		
 		return horizontalLayout;
 	}

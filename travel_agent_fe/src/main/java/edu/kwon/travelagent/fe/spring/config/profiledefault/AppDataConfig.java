@@ -8,9 +8,12 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.dialect.PostgresPlusDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,6 +22,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import edu.kwon.frmk.common.data.jpa.audit.AuditableUserAware;
+import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.travelagent.core.config.ConfigParam;
 import edu.kwon.travelagent.core.config.PropertiesParam;
 
@@ -36,8 +41,10 @@ import edu.kwon.travelagent.core.config.PropertiesParam;
  */
 @Profile(ConfigParam.APP_PROFILE_DEFAULT)
 @Configuration
+@ComponentScan(ConfigParam.JPA_REPO_BASE_PACKAGE)
 @EnableJpaRepositories(ConfigParam.JPA_REPO_BASE_PACKAGE)			// Package of annotated class is used, if not specify base package. repository-impl-postfix = (default) Impl
 @EnableTransactionManagement										// = <tx:annotation-driven />
+@EnableJpaAuditing
 @PropertySource(value = ConfigParam.APP_CONFIG_PROPERTIES, ignoreResourceNotFound = true)
 @PropertySource(value = ConfigParam.APP_PROFILE_DEFAULT_PROPERTIES, ignoreResourceNotFound = false)
 public class AppDataConfig {
@@ -107,6 +114,11 @@ public class AppDataConfig {
 //		vendorAdapter.setGenerateDdl(true);
 		vendorAdapter.setDatabasePlatform(PostgresPlusDialect.class.getName());
 		return vendorAdapter;
+	}
+	
+	@Bean
+	public AuditorAware<User> auditorProvider() {
+		return new AuditableUserAware();
 	}
 	
 }
