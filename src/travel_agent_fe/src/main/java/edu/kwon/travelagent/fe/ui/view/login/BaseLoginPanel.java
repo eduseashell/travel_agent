@@ -17,7 +17,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
-import edu.kwon.travelagent.core.ui.login.AbstractLoginView;
+import edu.kwon.travelagent.core.gui.login.AbstractLoginView;
 import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
 
 /**
@@ -32,7 +32,7 @@ public class BaseLoginPanel extends AbstractLoginView {
 	private static final long serialVersionUID = -6452066036379454674L;
 
 	/**
-	 * @see edu.kwon.travelagent.core.ui.login.AbstractLoginView#buildLoginForm()
+	 * @see edu.kwon.travelagent.core.gui.login.AbstractLoginView#buildLoginForm()
 	 */
 	@Override
 	protected Component buildLoginForm() {

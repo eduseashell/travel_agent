@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.core.ui.layout;
+package edu.kwon.travelagent.core.gui.layout;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;

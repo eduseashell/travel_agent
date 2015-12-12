@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.core.ui.layout;
+package edu.kwon.travelagent.core.gui.layout;
 
 import java.util.ArrayList;
 import java.util.List;

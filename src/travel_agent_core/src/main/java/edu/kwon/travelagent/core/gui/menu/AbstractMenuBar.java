@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.core.ui.menu;
+package edu.kwon.travelagent.core.gui.menu;
 
 import com.vaadin.server.Page;
 import com.vaadin.ui.MenuBar;

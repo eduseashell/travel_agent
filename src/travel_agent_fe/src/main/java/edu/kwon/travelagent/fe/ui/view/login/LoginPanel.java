@@ -31,7 +31,7 @@ public class LoginPanel extends BaseLoginPanel {
 	protected void signIn(String user, String password) {
 		if (!StringUtils.isEmpty(user) && !StringUtils.isEmpty(password)) {
 			UI.getCurrent().getSession().setAttribute("isLogin", true);
-			Page.getCurrent().setUriFragment("!" + MainUI.AFTER_LOG_IN_PANEL_NAME);
+			Page.getCurrent().setUriFragment("!" + MainUI.WELCOME_PANEL_NAME);
 		}
 		
 //		String msg = "<span>Welcome " + user + " with password: " + password + " to the agency flight</span>";

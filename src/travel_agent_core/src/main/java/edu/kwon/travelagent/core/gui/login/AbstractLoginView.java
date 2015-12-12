@@ -1,9 +1,9 @@
-package edu.kwon.travelagent.core.ui.login;
+package edu.kwon.travelagent.core.gui.login;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 
-import edu.kwon.travelagent.core.ui.layout.AbstractLayout;
+import edu.kwon.travelagent.core.gui.layout.AbstractLayout;
 
 /**
  * Abstract Login View:
