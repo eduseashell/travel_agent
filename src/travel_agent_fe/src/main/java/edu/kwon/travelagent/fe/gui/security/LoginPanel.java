@@ -1,25 +1,27 @@
-package edu.kwon.travelagent.fe.ui.view.login;
+package edu.kwon.travelagent.fe.gui.security;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.vaadin.server.Page;
+import ru.xpoft.vaadin.VaadinView;
+
 import com.vaadin.ui.UI;
 
-import edu.kwon.travelagent.fe.ui.MainUI;
-import ru.xpoft.vaadin.VaadinView;
+import edu.kwon.frmk.vaadin.gui.login.DefaultLoginPanel;
+import edu.kwon.frmk.vaadin.util.VaadinHelper;
+import edu.kwon.travelagent.fe.gui.MainUI;
 
 /**
  * Login Panel
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */
 @Component
 @Scope("prototype")
 @VaadinView(LoginPanel.NAME)
-public class LoginPanel extends BaseLoginPanel {
+public class LoginPanel extends DefaultLoginPanel {
 	
 	private static final long serialVersionUID = 6901879027592109979L;
 	public static final String NAME = "";
@@ -31,7 +33,7 @@ public class LoginPanel extends BaseLoginPanel {
 	protected void signIn(String user, String password) {
 		if (!StringUtils.isEmpty(user) && !StringUtils.isEmpty(password)) {
 			UI.getCurrent().getSession().setAttribute("isLogin", true);
-			Page.getCurrent().setUriFragment("!" + MainUI.WELCOME_PANEL_NAME);
+			VaadinHelper.setUriFragment(MainUI.WELCOME_PANEL_NAME);
 		}
 		
 //		String msg = "<span>Welcome " + user + " with password: " + password + " to the agency flight</span>";

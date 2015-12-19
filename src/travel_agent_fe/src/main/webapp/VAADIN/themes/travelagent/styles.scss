@@ -1,9 +1,5 @@
-@import "scss/default.scss";
-@import "scss/login.scss";
-@import "../valo/valo.scss";
+@import "../seashell/styles.scss";
 
 .travelagent {
-	@include default;
-	@include dashboard-login-view;
-	@include valo;
+	@include seashell;
 }

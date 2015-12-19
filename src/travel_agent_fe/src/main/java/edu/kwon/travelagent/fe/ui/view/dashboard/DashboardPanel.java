@@ -15,7 +15,7 @@ import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Panel;
 
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
-import edu.kwon.travelagent.core.gui.layout.AbstractLayout;
+import edu.kwon.frmk.vaadin.gui.layout.old.AbstractLayout;
 
 /**
  * Dashboard Panel

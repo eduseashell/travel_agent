@@ -12,13 +12,6 @@
 	<name>Travel Agent Front End Module</name>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>edu.kwon.travelagent.core</groupId>
-			<artifactId>travel_agent_core</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -30,7 +23,19 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework-version}</version>
 		</dependency>
+	
+		<!-- Vaadin -->
+		<!-- <dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client-compiler</artifactId>
+			<version>${vaadin-version}</version>
+		</dependency> -->
 
+		<dependency>
+			<groupId>edu.kwon.travelagent.core</groupId>
+			<artifactId>travel_agent_core</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

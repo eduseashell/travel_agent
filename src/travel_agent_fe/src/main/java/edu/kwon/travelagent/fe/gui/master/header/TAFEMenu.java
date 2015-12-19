@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.fe.ui.view.header;
+package edu.kwon.travelagent.fe.gui.master.header;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -6,18 +6,17 @@ import org.springframework.stereotype.Component;
 
 import com.vaadin.ui.UI;
 
-import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.common.share.spring.util.I18N;
+import edu.kwon.frmk.vaadin.gui.menu.AbstractMenuBar;
 import edu.kwon.frmk.vaadin.util.VaadinHelper;
-import edu.kwon.travelagent.core.gui.menu.AbstractMenuBar;
-import edu.kwon.travelagent.fe.ui.MainUI;
+import edu.kwon.travelagent.fe.gui.MainUI;
+import edu.kwon.travelagent.fe.gui.security.LoginPanel;
 import edu.kwon.travelagent.fe.ui.view.dashboard.DashboardPanel;
-import edu.kwon.travelagent.fe.ui.view.login.LoginPanel;
 
 /**
  * TAFEMenu Bar
  * "Travel Agent Front End" menu bar
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */
@@ -27,15 +26,12 @@ public class TAFEMenu extends AbstractMenuBar {
 	
 	private static final long serialVersionUID = -4241661350709674394L;
 
-	private I18N i18n;
-
 	/**
 	 * Build menu
 	 */
 	protected void buildMenu() {
-		i18n = AppContext.getBean(I18N.class);
-		MenuItem users = addItem(i18n.string("TAFEMenu.users"), null);
-		users.addItem(i18n.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
+		MenuItem users = addItem(I18N.string("TAFEMenu.users"), null);
+		users.addItem(I18N.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
 		
 		users.addItem("Open", new MenuCommand(LoginPanel.NAME));
 		users.addItem("Exit", new Command() {

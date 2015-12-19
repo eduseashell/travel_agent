@@ -1,7 +1,5 @@
 package edu.kwon.travelagent.fe.spring.config.profiledefault;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +9,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
-import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.travelagent.core.config.ConfigParam;
 import edu.kwon.travelagent.core.config.PropertiesParam;
 
 /**
  * Travel agent Front end Main Context "ApplicationMainContext"
- * @author Bunlong Taing
+ * @author eduseashell
  *
  * @since Jun 28, 2015
  * @since 0.0.1
@@ -53,15 +50,6 @@ public class ApplicationMainContext {
 		messageSource.setBasename(message);
 //		messageSource.setCacheSeconds(1);
 		return messageSource;
-	}
-	
-	@Bean
-	public I18N i18n() {
-		I18N i18n = new I18N();
-		i18n.setMessageSource(messageSource());
-		Locale defaultLocale = new Locale(defaultLanguage, defaultRegion);
-		i18n.setLocale(defaultLocale);
-		return i18n;
 	}
 	
 //	@Bean

@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.fe.ui;
+package edu.kwon.travelagent.fe.gui;
 
 import javax.annotation.PostConstruct;
 
@@ -12,22 +12,22 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.ui.VerticalLayout;
 
-import edu.kwon.travelagent.core.gui.main.AbstractUI;
-import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+import edu.kwon.frmk.vaadin.gui.main.AbstractUI;
+import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
+import edu.kwon.travelagent.fe.gui.master.footer.BottomPanel;
+import edu.kwon.travelagent.fe.gui.master.header.TopPanel;
+import edu.kwon.travelagent.fe.gui.security.LoginPanel;
 import edu.kwon.travelagent.fe.ui.view.dashboard.DashboardPanel;
-import edu.kwon.travelagent.fe.ui.view.footer.BottomPanel;
-import edu.kwon.travelagent.fe.ui.view.header.TopPanel;
-import edu.kwon.travelagent.fe.ui.view.login.LoginPanel;
 
 /**
  * MainUI the application main page
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Theme(VaadinTheme.THEME_NAME)
+@Theme(TravelAgentTheme.THEME_NAME)
 @PreserveOnRefresh
 @Title("Travel Agent")
 public class MainUI extends AbstractUI {
@@ -46,7 +46,7 @@ public class MainUI extends AbstractUI {
 	}
 
 	/**
-	 * @see edu.kwon.travelagent.core.gui.main.AbstractUI#buildTopPanel()
+	 * @see edu.kwon.frmk.vaadin.gui.main.AbstractUI#buildTopPanel()
 	 */
 	@Override
 	protected VerticalLayout buildTopPanel() {

@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.fe.ui.view.header;
+package edu.kwon.travelagent.fe.gui.master.header;
 
 import javax.annotation.PostConstruct;
 
@@ -16,13 +16,14 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
-import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+import edu.kwon.travelagent.core.vaadin.menu.TravelAgentMenu;
+import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
 import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
 
 /**
  * The page Top panel which contains header infomation
  * like logo, user, and menus
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */
@@ -33,14 +34,14 @@ public class TopPanel extends VerticalLayout {
 	private static final long serialVersionUID = -6431393804362388676L;
 	
 	@Autowired
-	private TAFEMenu menu;
+	private TravelAgentMenu menu;
 	
 	private Image imgLogo;
 	private Label lblAppName;
 	
 	public TopPanel() {
 		super();
-		addStyleName(VaadinTheme.LAYOUT_BACKGROUND_WHITE);
+		addStyleName(TravelAgentTheme.LAYOUT_BACKGROUND_WHITE);
 		setSpacing(false);
 	}
 	

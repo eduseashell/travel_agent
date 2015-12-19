@@ -1,4 +1,4 @@
-package edu.kwon.travelagent.fe.ui.view.footer;
+package edu.kwon.travelagent.fe.gui.master.footer;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
-import edu.kwon.travelagent.core.vaadin.themes.VaadinTheme;
+import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
 import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
 
 /**
@@ -33,7 +33,7 @@ public class BottomPanel extends VerticalLayout {
 	
 	public BottomPanel() {
 		super();
-		addStyleName(VaadinTheme.LAYOUT_BACKGROUND_WHITE);
+		addStyleName(TravelAgentTheme.LAYOUT_BACKGROUND_WHITE);
 		setSpacing(false);
 		initGUI();
 	}
@@ -57,7 +57,7 @@ public class BottomPanel extends VerticalLayout {
 		addComponent(horizontalLayout);
 		addComponent(lblCopyRight);
 		addComponent(lblVersion);
-		addStyleName(VaadinTheme.LAYOUT_FOOTER);
+		addStyleName(TravelAgentTheme.LAYOUT_FOOTER);
 		
 		setComponentAlignment(horizontalLayout, Alignment.MIDDLE_CENTER);
 		setComponentAlignment(lblCopyRight, Alignment.MIDDLE_CENTER);

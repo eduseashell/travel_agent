@@ -10,15 +10,17 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
+import ru.xpoft.vaadin.SpringApplicationContext;
+import ru.xpoft.vaadin.SpringVaadinServlet;
 import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.travelagent.core.config.ConfigParam;
 import edu.kwon.travelagent.fe.spring.config.profiledefault.AppDataConfig;
 import edu.kwon.travelagent.fe.spring.config.profiledefault.ApplicationMainContext;
-import ru.xpoft.vaadin.SpringVaadinServlet;
+import edu.kwon.travelagent.fe.spring.config.profiledefault.VaadinAppConfig;
 
 /**
  * Web Application Inititializer
- * @author Bunlong Taing
+ * @author eduseashell
  *
  * @since Jun 27, 2015
  * @since
@@ -45,7 +47,15 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	
 	@Override
 	protected WebApplicationContext createServletApplicationContext() {
-		return null;
+		Class<?>[] configClasses = {
+				VaadinAppConfig.class
+		};
+		
+		AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
+		servletAppContext.register(configClasses);
+		servletAppContext.getEnvironment().setDefaultProfiles(ConfigParam.APP_PROFILE_DEFAULT);
+		servletAppContext.refresh();
+		return servletAppContext;
 	}
 
 	@Override
@@ -59,6 +69,7 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	 */
 	@Override
 	protected void registerDispatcherServlet(ServletContext servletContext) {
+		SpringApplicationContext.setApplicationContext(createServletApplicationContext());
 		SpringVaadinServlet dispatcherServlet = new SpringVaadinServlet();
 		
 		ServletRegistration.Dynamic registration = servletContext.addServlet(getServletName(), dispatcherServlet);
@@ -79,7 +90,7 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setInitParameter("beanName", "mainUI");
-		registration.setInitParameter("contextConfigLocation", ConfigParam.VAADIN_CONTEXT_CONFIG_LOCATION);
+//		registration.setInitParameter("contextConfigLocation", ConfigParam.VAADIN_CONTEXT_CONFIG_LOCATION);
 		registration.setInitParameter("productionMode", "false");
 		registration.setInitParameter("spring.profiles.default", ConfigParam.APP_PROFILE_DEFAULT);
 //		registration.setInitParameter("spring.profiles.active", "");
