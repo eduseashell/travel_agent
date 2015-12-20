@@ -14,7 +14,7 @@ import edu.kwon.travelagent.core.config.ConfigParam;
  */
 @Profile(ConfigParam.APP_PROFILE_DEFAULT)
 @Configuration
-@ComponentScan(basePackages = {"edu.kwon.travelagent.fe.ui", "edu.kwon.travelagent.core.vaadin.menu"})
+@ComponentScan(basePackages = {"edu.kwon.travelagent.fe.gui", "edu.kwon.travelagent.core.vaadin.menu"})
 public class VaadinAppConfig {
 
 }

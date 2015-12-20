@@ -17,7 +17,7 @@ import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
 import edu.kwon.travelagent.fe.gui.master.footer.BottomPanel;
 import edu.kwon.travelagent.fe.gui.master.header.TopPanel;
 import edu.kwon.travelagent.fe.gui.security.LoginPanel;
-import edu.kwon.travelagent.fe.ui.view.dashboard.DashboardPanel;
+import edu.kwon.travelagent.fe.gui.user.UserTabSheet;
 
 /**
  * MainUI the application main page
@@ -42,7 +42,7 @@ public class MainUI extends AbstractUI {
 	@PostConstruct
 	public void postConstruct() {
 		LOGIN_PANEL_NAME = LoginPanel.NAME;
-		WELCOME_PANEL_NAME = DashboardPanel.NAME;
+		WELCOME_PANEL_NAME = UserTabSheet.VIEW_NAME;
 	}
 
 	/**
