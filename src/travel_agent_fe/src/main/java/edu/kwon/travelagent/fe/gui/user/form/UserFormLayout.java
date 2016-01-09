@@ -1,5 +1,6 @@
 package edu.kwon.travelagent.fe.gui.user.form;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -9,15 +10,20 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
+import edu.kwon.frmk.common.data.jpa.repository.user.User;
+import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.frmk.vaadin.factory.VaadinFactory;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractFormLayout;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class UserFormLayout extends AbstractFormLayout {
+public class UserFormLayout extends AbstractFormLayout<User> {
 
 	private static final long serialVersionUID = -6588699059614697221L;
+	
+	@Autowired
+	private UserService userService;
 	
 	private TextField txtUserName;
 	private PasswordField txtPassword;
@@ -41,24 +47,36 @@ public class UserFormLayout extends AbstractFormLayout {
 
 	@Override
 	public void assignValues(Long entityId) {
-		// TODO Auto-generated method stub
-		
+		reset();
+		if (entityId != null) {
+			entity = userService.findById(entityId);
+			fillDataToControls();
+		}
 	}
 
 	@Override
 	protected boolean validate() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	protected void onSaveAction() {
-		// TODO Auto-generated method stub
-		
+	protected void fillDataToControls() {
+		txtUserName.setValue(entity.getUserName());
+		txtPassword.setValue(entity.getPassword());
 	}
 
+	@Override
+	protected void fillDataToEntity() {
+		if (entity == null) {
+			entity = new User();
+		}
+		entity.setUserName(txtUserName.getValue());
+		entity.setPassword(txtPassword.getValue());
+	}
+	
 	@Override
 	public void reset() {
+		super.reset();
 		txtUserName.setValue("");
 		txtPassword.setValue("");
 	}

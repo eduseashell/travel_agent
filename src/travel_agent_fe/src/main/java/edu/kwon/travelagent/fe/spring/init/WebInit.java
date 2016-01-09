@@ -90,9 +90,9 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 	@Override
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setInitParameter("beanName", "mainUI");
-//		registration.setInitParameter("contextConfigLocation", ConfigParam.VAADIN_CONTEXT_CONFIG_LOCATION);
 		registration.setInitParameter("productionMode", "false");
 		registration.setInitParameter("spring.profiles.default", ConfigParam.APP_PROFILE_DEFAULT);
+//		registration.setInitParameter("contextConfigLocation", ConfigParam.VAADIN_CONTEXT_CONFIG_LOCATION);
 //		registration.setInitParameter("spring.profiles.active", "");
 	}
 	

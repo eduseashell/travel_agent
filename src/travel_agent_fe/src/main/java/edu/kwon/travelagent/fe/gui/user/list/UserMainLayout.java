@@ -2,8 +2,6 @@ package edu.kwon.travelagent.fe.gui.user.list;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -13,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.vaadin.data.Item;
 import com.vaadin.ui.Table.Align;
 
+import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.frmk.vaadin.component.select.Column;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractMainLayout;
@@ -23,7 +22,7 @@ import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractSearchPanel;
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class UserMainLayout extends AbstractMainLayout<Long> {
+public class UserMainLayout extends AbstractMainLayout<User> {
 
 	private static final long serialVersionUID = 4807136632997528711L;
 	
@@ -35,7 +34,7 @@ public class UserMainLayout extends AbstractMainLayout<Long> {
 		// TODO to remove, test only
 		super.init();
 		setCaption(I18N.string("users"));
-		renderTableRows(Stream.of(1l,2l,3l).collect(Collectors.toList()));
+//		renderTableRows();
 	}
 
 	@Override
@@ -53,19 +52,17 @@ public class UserMainLayout extends AbstractMainLayout<Long> {
 	}
 
 	@Override
-	public <T> void renderRow(Item item, T row) {
+	@SuppressWarnings("unchecked")
+	public void renderRow(Item item, User row) {
 		item.getItemProperty("id").setValue(1);
 		item.getItemProperty("name").setValue("TEST");
-	}
-
-	@Override
-	protected <T> Long getItemId(T rowEntity) {
-		return (Long) rowEntity;
 	}
 	
 	@Override
 	protected AbstractSearchPanel onCreateSearchPanel() {
 		return searchPanel;
 	}
+
+	
 
 }

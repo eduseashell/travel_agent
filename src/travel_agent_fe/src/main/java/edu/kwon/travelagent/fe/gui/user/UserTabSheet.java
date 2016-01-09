@@ -25,7 +25,7 @@ public class UserTabSheet extends AbstractCrudTabSheetLayout {
 
 	private static final long serialVersionUID = -5259413296535848102L;
 	
-	public static final String VIEW_NAME = "user.views";
+	public static final String VIEW_NAME = "user/views";
 	
 	@Autowired
 	private UserMainLayout mainLayout;
