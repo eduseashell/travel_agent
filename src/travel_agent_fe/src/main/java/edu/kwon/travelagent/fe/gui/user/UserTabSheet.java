@@ -1,5 +1,7 @@
 package edu.kwon.travelagent.fe.gui.user;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -25,13 +27,19 @@ public class UserTabSheet extends AbstractCrudTabSheetLayout {
 
 	private static final long serialVersionUID = -5259413296535848102L;
 	
-	public static final String VIEW_NAME = "user/views";
+	public static final String VIEW_NAME = "views/user";
 	
 	@Autowired
 	private UserMainLayout mainLayout;
 	@Autowired
 	private UserFormLayout formLayout;
 
+	@Override
+	public void postConstruct() {
+		super.postConstruct();
+		formLayout.setMainTabSheet(this);
+	}
+	
 	@Override
 	protected AbstractComponentContainer buildMainLayout() {
 		mainLayout.setCrudListener(this);

@@ -1,6 +1,5 @@
 package edu.kwon.travelagent.fe.test.service;
 
-import edu.kwon.frmk.common.data.jpa.repository.entities.base.BaseEntityService;
 import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
 import edu.kwon.frmk.common.share.spring.context.AppContext;
@@ -14,7 +13,7 @@ public class TestUserService extends BaseTest {
 		user.setUserName("Super Admin - TEST");
 		user.setPassword("Password");
 		
-		BaseEntityService service = AppContext.getBean(UserService.class);
+		UserService service = AppContext.getBean(UserService.class);
 		service.save(user);
 	}
 
