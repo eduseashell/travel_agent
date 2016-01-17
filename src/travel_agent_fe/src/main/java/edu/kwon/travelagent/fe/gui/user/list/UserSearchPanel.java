@@ -3,17 +3,19 @@ package edu.kwon.travelagent.fe.gui.user.list;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
-import edu.kwon.frmk.vaadin.factory.VaadinFactory;
+import edu.kwon.frmk.common.data.jpa.repository.entities.base.BaseSpecification;
+import edu.kwon.frmk.common.data.jpa.repository.entities.root.RootSpecification;
+import edu.kwon.frmk.common.data.jpa.repository.user.User;
+import edu.kwon.frmk.vaadin.component.factory.VaadinFactory;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractSearchPanel;
 
 @org.springframework.stereotype.Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class UserSearchPanel extends AbstractSearchPanel {
+public class UserSearchPanel extends AbstractSearchPanel<User> {
 
 	private static final long serialVersionUID = 8784219661911994041L;
 	
@@ -28,13 +30,13 @@ public class UserSearchPanel extends AbstractSearchPanel {
 	}
 
 	@Override
-	protected ClickListener onSearchActionClicked() {
-		return e -> reset();
+	public void reset() {
+		txtSearchText.setValue("");
 	}
 
 	@Override
-	public void reset() {
-		txtSearchText.setValue("");
+	protected RootSpecification<User> getSpecification() {
+		return new BaseSpecification<User>();
 	}
 
 }

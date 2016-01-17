@@ -9,7 +9,7 @@ import ru.xpoft.vaadin.VaadinView;
 import com.vaadin.ui.UI;
 
 import edu.kwon.frmk.vaadin.gui.login.DefaultLoginPanel;
-import edu.kwon.frmk.vaadin.util.VaadinHelper;
+import edu.kwon.frmk.vaadin.util.helper.VaadinHelper;
 import edu.kwon.travelagent.fe.gui.MainUI;
 
 /**

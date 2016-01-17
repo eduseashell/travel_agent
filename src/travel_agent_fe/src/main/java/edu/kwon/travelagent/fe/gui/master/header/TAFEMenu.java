@@ -8,7 +8,7 @@ import com.vaadin.ui.UI;
 
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.frmk.vaadin.gui.menu.AbstractMenuBar;
-import edu.kwon.frmk.vaadin.util.VaadinHelper;
+import edu.kwon.frmk.vaadin.util.helper.VaadinHelper;
 import edu.kwon.travelagent.fe.gui.MainUI;
 import edu.kwon.travelagent.fe.gui.security.LoginPanel;
 import edu.kwon.travelagent.fe.ui.view.dashboard.DashboardPanel;

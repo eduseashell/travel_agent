@@ -14,7 +14,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.InlineDateField;
 import com.vaadin.ui.Panel;
 
-import edu.kwon.frmk.vaadin.factory.VaadinFactory;
+import edu.kwon.frmk.vaadin.component.factory.VaadinFactory;
 import edu.kwon.frmk.vaadin.gui.layout.old.AbstractLayout;
 
 /**

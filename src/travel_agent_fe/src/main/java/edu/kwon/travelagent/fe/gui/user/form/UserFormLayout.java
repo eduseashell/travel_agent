@@ -1,23 +1,31 @@
 package edu.kwon.travelagent.fe.gui.user.form;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
 import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.common.share.spring.util.I18N;
-import edu.kwon.frmk.vaadin.factory.VaadinFactory;
+import edu.kwon.frmk.common.share.util.DateUtil;
+import edu.kwon.frmk.common.share.util.NumberUtil;
+import edu.kwon.frmk.vaadin.component.factory.VaadinFactory;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractFormLayout;
+import edu.kwon.frmk.vaadin.util.Validator;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -41,64 +49,155 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 	
 	private TextField txtUserName;
 	private PasswordField txtPassword;
+	private PasswordField txtConfirmPwd;
+	
+	private DateField dfLastPwdModified;
+	private DateField dfLastLogIn;
+	private DateField dfLastLogOut;
+	private TextField txtMaxTimePwdChange;
+	private TextField txtMaxAttemptLogInAllow;
+	private CheckBox cbDefaultPwd;
+	private CheckBox cbNeedPwdChange;
+	private CheckBox cbFreeze;
+	private CheckBox cbActive;
 	
 	@Override
 	protected void init() {
 		super.init();
 		setCaption(I18N.string("user"));
+		setIcon(FontAwesome.USER);
 	}
 	
-	private void initControls() {
-		txtFirstName = VaadinFactory.getTextField("first.name", 180, true);
-		txtMiddleName = VaadinFactory.getTextField("middle.name", 180);
-		txtLastName = VaadinFactory.getTextField("last.name", 180, true);
-		txtNickName = VaadinFactory.getTextField("nick.name", 180);
-		txtTitle = VaadinFactory.getTextField("title", 180);
-		
-		txtPhone1 = VaadinFactory.getTextField("primary.phone", 180);
-		txtPhone2 = VaadinFactory.getTextField("secondary.name", 180);
-		txtEMail = VaadinFactory.getTextField("e.mail", 180);
-		txtBirthPlace = VaadinFactory.getTextField("birth.place", 180, true);
-		dfBirthDate = VaadinFactory.getDateField("birth.date");
-		
-		txtUserName = VaadinFactory.getTextField("user.name", 200, true);
-		txtPassword = VaadinFactory.getPasswordField("password", 200, true);
-	}
-
 	@Override
 	protected AbstractComponentContainer initGUI() {
 		initControls();
-		Panel panel = createGeneralAccountSettingsPanel();
 		
-		FormLayout form = new FormLayout();
-		form.addComponent(txtUserName);
-		form.addComponent(txtPassword);
-		return form;
+		HorizontalLayout horizontalLayout = new HorizontalLayout();
+		horizontalLayout.setSpacing(true);
+		horizontalLayout.setWidth(100, Unit.PERCENTAGE);
+		horizontalLayout.addComponent(createGeneralAccountSettingsPanel());
+		horizontalLayout.addComponent(createPersonalInfoPanel());
+		
+		VerticalLayout content = new VerticalLayout();
+		content.setSpacing(true);
+		content.addComponent(horizontalLayout);
+		content.addComponent(createAccountInfoPanel());
+		content.addComponent(createContactInfoPanel());
+		
+		return content;
+	}
+	
+	private void initControls() {
+		txtFirstName = VaadinFactory.getTextField("first.name", true);
+		txtMiddleName = VaadinFactory.getTextField("middle.name");
+		txtLastName = VaadinFactory.getTextField("last.name", true);
+		txtNickName = VaadinFactory.getTextField("nick.name");
+		txtTitle = VaadinFactory.getTextField("title");
+		
+		txtPhone1 = VaadinFactory.getTextField("primary.phone");
+		txtPhone2 = VaadinFactory.getTextField("secondary.name");
+		txtEMail = VaadinFactory.getTextField("e.mail");
+		txtBirthPlace = VaadinFactory.getTextField("place.of.birth");
+		dfBirthDate = VaadinFactory.getDateField("date.of.birth", true);
+		
+		txtUserName = VaadinFactory.getTextField("user.name", true);
+		txtPassword = VaadinFactory.getPasswordField("password", true);
+		txtConfirmPwd = VaadinFactory.getPasswordField("confirm.password", true);
+		
+		dfLastPwdModified = VaadinFactory.getDateField("last.pwd.modified.date");
+		dfLastLogIn = VaadinFactory.getDateField("last.log.in.date");
+		dfLastLogOut = VaadinFactory.getDateField("last.log.out.date");
+		txtMaxTimePwdChange = VaadinFactory.getTextField("max.time.to.change.pwd");
+		txtMaxAttemptLogInAllow = VaadinFactory.getTextField("max.attempt.log.in.allow");
+		cbDefaultPwd = VaadinFactory.getCheckBox("default.pwd");
+		cbNeedPwdChange = VaadinFactory.getCheckBox("need.pwd.change");
+		cbFreeze = VaadinFactory.getCheckBox("freeze");
+		cbActive = VaadinFactory.getCheckBox("active");
 	}
 	
 	private Panel createGeneralAccountSettingsPanel() {
-		Panel panel = VaadinFactory.getPanel("general.account.settings");
-		
 		HorizontalLayout content = new HorizontalLayout();
-		content.setMargin(true);
 		content.setSpacing(true);
+		content.setMargin(true);
+		
+		FormLayout formLayout = new FormLayout();
+		formLayout.addComponent(txtUserName);
+		formLayout.addComponent(txtPassword);
+		formLayout.addComponent(txtConfirmPwd);
+		formLayout.addComponent(cbActive);
+		content.addComponent(formLayout);
+		
+		Panel panel = VaadinFactory.getPanel("general.account.settings");
+		panel.setContent(content);
+		
+		return panel;
+	}
+	
+	private Panel createAccountInfoPanel() {
+		HorizontalLayout content = new HorizontalLayout();
+		content.setSpacing(true);
+		content.setMargin(true);
+		
+		FormLayout formLayout = new FormLayout();
+		formLayout.addComponent(dfLastLogIn);
+		formLayout.addComponent(dfLastLogOut);
+		formLayout.addComponent(dfLastPwdModified);
+		content.addComponent(formLayout);
+		
+		formLayout = new FormLayout();
+		formLayout.addComponent(txtMaxTimePwdChange);
+		formLayout.addComponent(txtMaxAttemptLogInAllow);
+		content.addComponent(formLayout);
+		
+		formLayout = new FormLayout();
+		formLayout.addComponent(cbDefaultPwd);
+		formLayout.addComponent(cbNeedPwdChange);
+		formLayout.addComponent(cbFreeze);
+		content.addComponent(formLayout);
+		
+		Panel panel = VaadinFactory.getPanel("account.info");
+		panel.setContent(content);
+		
+		return panel;
+	}
+	
+	private Panel createPersonalInfoPanel() {
+		HorizontalLayout content = new HorizontalLayout();
+		content.setSpacing(true);
+		content.setMargin(true);
 		
 		FormLayout formLayout = new FormLayout();
 		formLayout.addComponent(txtTitle);
 		formLayout.addComponent(txtFirstName);
 		formLayout.addComponent(txtMiddleName);
 		formLayout.addComponent(txtLastName);
-		formLayout.addComponent(txtNickName);
-		formLayout.addComponent(txtUserName);
-		formLayout.addComponent(txtPassword);
 		content.addComponent(formLayout);
 		
 		formLayout = new FormLayout();
+		formLayout.addComponent(txtNickName);
 		formLayout.addComponent(txtBirthPlace);
 		formLayout.addComponent(dfBirthDate);
+		content.addComponent(formLayout);
+		
+		Panel panel = VaadinFactory.getPanel("personal.info");
+		panel.setContent(content);
+		
+		return panel;
+	}
+	
+	private Panel createContactInfoPanel() {
+		HorizontalLayout content = new HorizontalLayout();
+		content.setSpacing(true);
+		content.setMargin(true);
+		
+		FormLayout formLayout = new FormLayout();
 		formLayout.addComponent(txtPhone1);
 		formLayout.addComponent(txtPhone2);
 		formLayout.addComponent(txtEMail);
+		content.addComponent(formLayout);
+		
+		Panel panel = VaadinFactory.getPanel("contact.info");
+		panel.setContent(content);
 		
 		return panel;
 	}
@@ -113,14 +212,28 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 	}
 
 	@Override
-	protected boolean validate() {
-		return true;
-	}
-
-	@Override
 	protected void fillDataToControls() {
+		txtFirstName.setValue(entity.getFirstName());
+		txtMiddleName.setValue(entity.getMiddleName());
+		txtLastName.setValue(entity.getLastName());
+		txtNickName.setValue(entity.getNickName());
+		txtTitle.setValue(entity.getTitle());
+		txtPhone1.setValue(entity.getPhone1());
+		txtPhone2.setValue(entity.getPhone2());
+		txtEMail.setValue(entity.getEmail());
+		txtBirthPlace.setValue(entity.getBirthPlace());
+		dfBirthDate.setValue(entity.getBirthDate());
 		txtUserName.setValue(entity.getUserName());
-		txtPassword.setValue(entity.getPassword());
+		
+		dfLastPwdModified.setValue(entity.getLastPwdModifiedDate());
+		dfLastLogIn.setValue(entity.getLastLogInDate());
+		dfLastLogOut.setValue(entity.getLastLogOutDate());
+		txtMaxTimePwdChange.setValue(NumberUtil.toString(entity.getMaxTimePwdChange()));
+		txtMaxAttemptLogInAllow.setValue(NumberUtil.toString(entity.getMaxAttemptLogInAllow()));
+		cbDefaultPwd.setValue(entity.getDefaultPwd());
+		cbNeedPwdChange.setValue(entity.getNeedPwdChange());
+		cbFreeze.setValue(entity.getFreeze());
+		cbActive.setValue(entity.getActive());
 	}
 
 	@Override
@@ -128,15 +241,66 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		if (entity == null) {
 			entity = new User();
 		}
+		entity.setFirstName(txtFirstName.getValue());
+		entity.setMiddleName(txtMiddleName.getValue());
+		entity.setLastName(txtLastName.getValue());
+		entity.setNickName(txtNickName.getValue());
+		entity.setTitle(txtTitle.getValue());
+		entity.setPhone1(txtPhone1.getValue());
+		entity.setPhone2(txtPhone2.getValue());
+		entity.setEmail(txtEMail.getValue());
+		entity.setBirthPlace(txtBirthPlace.getValue());
+		entity.setBirthDate(dfBirthDate.getValue());
 		entity.setUserName(txtUserName.getValue());
 		entity.setPassword(txtPassword.getValue());
 	}
 	
 	@Override
+	protected boolean validate() {
+		boolean valid = true;
+		String msgPwdNotMatch = I18N.string("password.not.match");
+		String msgInvalidBD = I18N.string("user.age.limit");
+		Date minBirthDate = DateUtil.addYear(DateUtil.now(), -18);
+		
+		valid &= Validator.validateRequiredTextField(txtFirstName);
+		valid &= Validator.validateRequiredTextField(txtLastName);
+		valid &= Validator.validateRequiredTextField(txtUserName);
+		valid &= Validator.validateRequiredTextField(txtPassword) &&
+				 Validator.validateMinStringLength(txtPassword, 8);
+		valid &= Validator.validateRequiredTextField(txtConfirmPwd) &&
+				 Validator.validateMinStringLength(txtConfirmPwd, 8) &&
+				 Validator.validateEqualString(txtPassword, txtConfirmPwd, msgPwdNotMatch);
+		valid &= Validator.validateRequiredDateField(dfBirthDate) &&
+				 Validator.validateDateFieldBefore(dfBirthDate, minBirthDate, msgInvalidBD);
+		return valid;
+	}
+	
+	@Override
 	public void reset() {
 		super.reset();
-		txtUserName.setValue("");
-		txtPassword.setValue("");
+		txtFirstName.setValue(null);
+		txtMiddleName.setValue(null);
+		txtLastName.setValue(null);
+		txtNickName.setValue(null);
+		txtTitle.setValue(null);
+		txtPhone1.setValue(null);
+		txtPhone2.setValue(null);
+		txtEMail.setValue(null);
+		txtBirthPlace.setValue(null);
+		dfBirthDate.setValue(null);
+		txtUserName.setValue(null);
+		txtPassword.setValue(null);
+		txtConfirmPwd.setValue(null);
+		
+		dfLastPwdModified.setValue(null);
+		dfLastLogIn.setValue(null);
+		dfLastLogOut.setValue(null);
+		txtMaxTimePwdChange.setValue(null);
+		txtMaxAttemptLogInAllow.setValue(null);
+		cbDefaultPwd.setValue(Boolean.FALSE);
+		cbNeedPwdChange.setValue(Boolean.FALSE);
+		cbFreeze.setValue(Boolean.FALSE);
+		cbActive.setValue(Boolean.FALSE);
 	}
 
 	@Override

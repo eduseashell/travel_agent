@@ -10,16 +10,16 @@
 	<artifactId>travel_agent_core</artifactId>
 	<name>Travel Agent Core Module</name>
 	
-	<dependencies>
+<!-- 	<dependencies>
 	
-		<!-- Spring framework core -->
+		Spring framework core
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring-framework-version}</version>
 		</dependency>
 		
-	</dependencies>
+	</dependencies> -->
 	
 	<build>
 		<resources>
