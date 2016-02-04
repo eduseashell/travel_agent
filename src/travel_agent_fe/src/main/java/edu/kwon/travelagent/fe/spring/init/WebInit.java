@@ -5,6 +5,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,6 +17,7 @@ import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.travelagent.core.config.ConfigParam;
 import edu.kwon.travelagent.fe.spring.config.profiledefault.AppDataConfig;
 import edu.kwon.travelagent.fe.spring.config.profiledefault.ApplicationMainContext;
+import edu.kwon.travelagent.fe.spring.config.profiledefault.SecurityConfig;
 import edu.kwon.travelagent.fe.spring.config.profiledefault.VaadinAppConfig;
 
 /**
@@ -26,19 +28,21 @@ import edu.kwon.travelagent.fe.spring.config.profiledefault.VaadinAppConfig;
  * @since
  * @version
  */
+@Order(1)
 public class WebInit extends AbstractDispatcherServletInitializer {
 
 	@Override
 	protected WebApplicationContext createRootApplicationContext() {
 		Class<?>[] configClasses = {
 			ApplicationMainContext.class,
-			AppDataConfig.class
+			AppDataConfig.class,
+			SecurityConfig.class
 		};
 		
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(configClasses);
 		rootContext.getEnvironment().setDefaultProfiles(ConfigParam.APP_PROFILE_DEFAULT);
-//		rootContext.refresh();
+		rootContext.refresh();
 		
 		// Set the context for using in the application
 		AppContext.setAppContext(rootContext);
@@ -54,6 +58,7 @@ public class WebInit extends AbstractDispatcherServletInitializer {
 		AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
 		servletAppContext.register(configClasses);
 		servletAppContext.getEnvironment().setDefaultProfiles(ConfigParam.APP_PROFILE_DEFAULT);
+		servletAppContext.setParent(AppContext.getAppContext());
 		servletAppContext.refresh();
 		return servletAppContext;
 	}

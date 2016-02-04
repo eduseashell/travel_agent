@@ -18,7 +18,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring-framework-version}</version>
 		</dependency>
-	
+		
 		<!-- Vaadin -->
 		<!-- <dependency>
 			<groupId>com.vaadin</groupId>
