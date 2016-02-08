@@ -2,11 +2,14 @@ package edu.kwon.travelagent.fe.gui.user.form;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
 import com.vaadin.ui.AbstractComponentContainer;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.DateField;
@@ -19,7 +22,6 @@ import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
-import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.frmk.common.share.util.DateUtil;
 import edu.kwon.frmk.common.share.util.NumberUtil;
@@ -33,7 +35,8 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 
 	private static final long serialVersionUID = -6588699059614697221L;
 	
-	private UserService userService = AppContext.getBean(UserService.class);
+	@Autowired
+	private UserService userService;
 	
 	private TextField txtFirstName;
 	private TextField txtMiddleName;
@@ -58,7 +61,7 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 	private TextField txtMaxAttemptLogInAllow;
 	private CheckBox cbDefaultPwd;
 	private CheckBox cbNeedPwdChange;
-	private CheckBox cbFreeze;
+	private CheckBox cbLocked;
 	private CheckBox cbActive;
 	
 	@Override
@@ -72,11 +75,14 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 	protected AbstractComponentContainer initGUI() {
 		initControls();
 		
+		Panel personalInfoPanel = createPersonalInfoPanel();
+		
 		HorizontalLayout horizontalLayout = new HorizontalLayout();
 		horizontalLayout.setSpacing(true);
 		horizontalLayout.setWidth(100, Unit.PERCENTAGE);
 		horizontalLayout.addComponent(createGeneralAccountSettingsPanel());
-		horizontalLayout.addComponent(createPersonalInfoPanel());
+		horizontalLayout.addComponent(personalInfoPanel);
+		horizontalLayout.setExpandRatio(personalInfoPanel, 1);
 		
 		VerticalLayout content = new VerticalLayout();
 		content.setSpacing(true);
@@ -111,7 +117,7 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		txtMaxAttemptLogInAllow = VaadinFactory.getTextField("max.attempt.log.in.allow");
 		cbDefaultPwd = VaadinFactory.getCheckBox("default.pwd");
 		cbNeedPwdChange = VaadinFactory.getCheckBox("need.pwd.change");
-		cbFreeze = VaadinFactory.getCheckBox("freeze");
+		cbLocked = VaadinFactory.getCheckBox("locked");
 		cbActive = VaadinFactory.getCheckBox("active");
 	}
 	
@@ -129,6 +135,7 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		
 		Panel panel = VaadinFactory.getPanel("general.account.settings");
 		panel.setContent(content);
+		panel.setWidth(450, Unit.PIXELS);
 		
 		return panel;
 	}
@@ -152,7 +159,7 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		formLayout = new FormLayout();
 		formLayout.addComponent(cbDefaultPwd);
 		formLayout.addComponent(cbNeedPwdChange);
-		formLayout.addComponent(cbFreeze);
+		formLayout.addComponent(cbLocked);
 		content.addComponent(formLayout);
 		
 		Panel panel = VaadinFactory.getPanel("account.info");
@@ -232,7 +239,7 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		txtMaxAttemptLogInAllow.setValue(NumberUtil.toString(entity.getMaxAttemptLogInAllow()));
 		cbDefaultPwd.setValue(entity.getDefaultPwd());
 		cbNeedPwdChange.setValue(entity.getNeedPwdChange());
-		cbFreeze.setValue(entity.getFreeze());
+		cbLocked.setValue(entity.getLocked());
 		cbActive.setValue(entity.getActive());
 	}
 
@@ -252,7 +259,9 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		entity.setBirthPlace(txtBirthPlace.getValue());
 		entity.setBirthDate(dfBirthDate.getValue());
 		entity.setUserName(txtUserName.getValue());
-		entity.setPassword(txtPassword.getValue());
+		if (StringUtils.isNotBlank(txtPassword.getValue())) {
+			entity.setPassword(txtPassword.getValue());
+		}
 	}
 	
 	@Override
@@ -265,13 +274,17 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		valid &= Validator.validateRequiredTextField(txtFirstName);
 		valid &= Validator.validateRequiredTextField(txtLastName);
 		valid &= Validator.validateRequiredTextField(txtUserName);
-		valid &= Validator.validateRequiredTextField(txtPassword) &&
-				 Validator.validateMinStringLength(txtPassword, 8);
-		valid &= Validator.validateRequiredTextField(txtConfirmPwd) &&
-				 Validator.validateMinStringLength(txtConfirmPwd, 8) &&
-				 Validator.validateEqualString(txtPassword, txtConfirmPwd, msgPwdNotMatch);
 		valid &= Validator.validateRequiredDateField(dfBirthDate) &&
 				 Validator.validateDateFieldBefore(dfBirthDate, minBirthDate, msgInvalidBD);
+		valid &= Validator.validateEMailTextField(txtEMail);
+		
+		// Validate pwd only the password field is not blank
+		if (StringUtils.isNotBlank(txtPassword.getValue())) {
+			valid &= Validator.validateMinStringLength(txtPassword, 8);
+			valid &= Validator.validateRequiredTextField(txtConfirmPwd) &&
+					 Validator.validateMinStringLength(txtConfirmPwd, 8) &&
+					 Validator.validateEqualString(txtPassword, txtConfirmPwd, msgPwdNotMatch);
+		}
 		return valid;
 	}
 	
@@ -299,13 +312,41 @@ public class UserFormLayout extends AbstractFormLayout<User> {
 		txtMaxAttemptLogInAllow.setValue(null);
 		cbDefaultPwd.setValue(Boolean.FALSE);
 		cbNeedPwdChange.setValue(Boolean.FALSE);
-		cbFreeze.setValue(Boolean.FALSE);
+		cbLocked.setValue(Boolean.FALSE);
 		cbActive.setValue(Boolean.FALSE);
 	}
 
 	@Override
 	protected UserService getService() {
 		return userService;
+	}
+	
+	@Override
+	protected void onSaveAction() {
+		if (StringUtils.isNotBlank(txtPassword.getValue())) {
+			// Save and encrypt password
+			super.onSaveAction();
+		} else {
+			// Update with old password, no encrypted
+			update();
+		}
+	}
+	
+	/**
+	 * Update the user without changing the password
+	 */
+	private void update() {
+		fillDataToEntity();
+		if (entity == null) {
+			throw new IllegalStateException("Entity cannot be null");
+		} else if (StringUtils.isEmpty(entity.getPassword())) {
+			throw new IllegalStateException("User password cannot be empty");
+		}
+		getService().update(entity);
+		String caption = I18N.string("save");
+		String desc = I18N.string("msg.success.save");
+		VaadinFactory.getNotification(caption, desc)
+			.show(Page.getCurrent());
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.kwon.frmk.common.data.jpa.repository.menus.item.MenuItem;
 import edu.kwon.frmk.common.data.jpa.repository.menus.menu.Menu;
+import edu.kwon.frmk.vaadin.gui.profile.ProfileTabSheet;
 
 /**
  * 
@@ -17,7 +18,8 @@ public class MenuHelper {
 		// TODO load from database
 		MenuItem users = getMenuItem("TAFEMenu.users", null);
 		users.setChildren(new ArrayList<MenuItem>());
-		users.getChildren().add(getMenuItem("users", ""));
+		users.getChildren().add(getMenuItem("users", "views/users"));
+		users.getChildren().add(getMenuItem("profiles", ProfileTabSheet.VIEW_NAME));
 		users.getChildren().add(getMenuItem("exit", ""));
 		
 		MenuItem view = getMenuItem("TAFEMenu.dashboard", null);

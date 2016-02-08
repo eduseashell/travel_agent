@@ -10,7 +10,6 @@ import com.vaadin.ui.AbstractComponentContainer;
 
 import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
-import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractTabSheetLayout;
 import edu.kwon.travelagent.fe.gui.user.form.UserFormLayout;
 import edu.kwon.travelagent.fe.gui.user.list.UserMainLayout;
@@ -27,9 +26,10 @@ public class UserTabSheet extends AbstractTabSheetLayout<User> {
 
 	private static final long serialVersionUID = -5259413296535848102L;
 	
-	public static final String VIEW_NAME = "views/user";
+	public static final String VIEW_NAME = "views/users";
 	
-	private UserService userService = AppContext.getBean(UserService.class);
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private UserMainLayout mainLayout;
 	@Autowired
@@ -38,6 +38,7 @@ public class UserTabSheet extends AbstractTabSheetLayout<User> {
 	@Override
 	public void postConstruct() {
 		super.postConstruct();
+		mainLayout.setMainTabSheet(this);
 		formLayout.setMainTabSheet(this);
 	}
 	

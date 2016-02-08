@@ -16,8 +16,11 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import edu.kwon.frmk.vaadin.component.factory.VaadinFactory;
+import edu.kwon.frmk.vaadin.gui.menu.AbstractMenuBar.LogOutListener;
+import edu.kwon.frmk.vaadin.util.helper.VaadinHelper;
 import edu.kwon.travelagent.core.vaadin.menu.TravelAgentMenu;
 import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
+import edu.kwon.travelagent.fe.gui.MainUI;
 import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
 
 /**
@@ -29,7 +32,7 @@ import edu.kwon.travelagent.fe.spring.config.util.FeAppConfig;
  */
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-public class TopPanel extends VerticalLayout {
+public class TopPanel extends VerticalLayout implements LogOutListener {
 
 	private static final long serialVersionUID = -6431393804362388676L;
 	
@@ -50,6 +53,7 @@ public class TopPanel extends VerticalLayout {
 	 */
 	@PostConstruct
 	public void PostContruct() {
+		menu.setLogOutListener(this);
 		initGUI();
 	}
 	
@@ -82,6 +86,11 @@ public class TopPanel extends VerticalLayout {
 		horizontalLayout.addComponent(lblAppName);
 		
 		return horizontalLayout;
+	}
+
+	@Override
+	public void onLogOutSuccess() {
+		VaadinHelper.setUriFragment(MainUI.LOGIN_PANEL_NAME);
 	}
 
 }

@@ -14,7 +14,6 @@ import com.vaadin.server.FontAwesome;
 import edu.kwon.frmk.common.data.jpa.repository.entities.audit.AuditEntityService;
 import edu.kwon.frmk.common.data.jpa.repository.user.User;
 import edu.kwon.frmk.common.data.jpa.repository.user.UserService;
-import edu.kwon.frmk.common.share.spring.context.AppContext;
 import edu.kwon.frmk.common.share.spring.util.I18N;
 import edu.kwon.frmk.vaadin.component.table.Column;
 import edu.kwon.frmk.vaadin.gui.layout.crud.AbstractMainLayout;
@@ -30,7 +29,8 @@ public class UserMainLayout extends AbstractMainLayout<User> {
 
 	private static final long serialVersionUID = 4807136632997528711L;
 	
-	private UserService userService = AppContext.getBean(UserService.class);
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private UserSearchPanel searchPanel;

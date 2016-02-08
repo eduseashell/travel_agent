@@ -19,7 +19,7 @@ import edu.kwon.frmk.vaadin.gui.menu.AbstractMenuBar;
 public class TravelAgentMenu extends AbstractMenuBar {
 
 	private static final long serialVersionUID = 7617779502184985905L;
-
+	
 	/**
 	 * @see edu.kwon.frmk.vaadin.gui.menu.AbstractMenuBar#buildMenu()
 	 */
@@ -30,6 +30,15 @@ public class TravelAgentMenu extends AbstractMenuBar {
 		for (edu.kwon.frmk.common.data.jpa.repository.menus.item.MenuItem item : menu.getMenuItems()) {
 			addMenuToMenuBar(item, null);
 		}
+		
+		// TODO remove logout menu item
+		addItem("Logout", new Command() {
+			private static final long serialVersionUID = -4879613447061624966L;
+			@Override
+			public void menuSelected(MenuItem selectedItem) {
+				logOut();
+			}
+		});
 	}
 	
 	private void addMenuToMenuBar(edu.kwon.frmk.common.data.jpa.repository.menus.item.MenuItem item, MenuItem parent) {

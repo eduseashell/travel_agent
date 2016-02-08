@@ -51,16 +51,12 @@ public class AppDataConfig {
 	
 	@Value(PropertiesParam.DATABASE_URL)
 	private String databaseUrl;
-	
 	@Value(PropertiesParam.DATABASE_INITIAL_SIZE)
 	private int initialSize;
-	
 	@Value(PropertiesParam.DATABASE_MAX_ACTIVE)
 	private int maxActive;
-	
 	@Value(PropertiesParam.DATABASE_USERNAME)
 	private String username;
-	
 	@Value(PropertiesParam.DATABASE_PASSWORD)
 	private String password;
 	
@@ -78,8 +74,8 @@ public class AppDataConfig {
 	
 	public Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.show_sql", ConfigParam.HIBERNATE_SHOW_SQL);
+		properties.setProperty("hibernate.hbm2ddl.auto", ConfigParam.HIBERNATE_HBM2DDL_AUTO);
 		return properties;
 	}
 	
