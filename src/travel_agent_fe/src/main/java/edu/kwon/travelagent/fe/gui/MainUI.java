@@ -14,11 +14,11 @@ import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.vaadin.gui.main.AbstractUI;
 import edu.kwon.frmk.vaadin.gui.main.DefaultErrorViewProvider;
+import edu.kwon.frmk.vaadin.gui.user.UserTabSheet;
 import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
 import edu.kwon.travelagent.fe.gui.master.footer.BottomPanel;
 import edu.kwon.travelagent.fe.gui.master.header.TopPanel;
 import edu.kwon.travelagent.fe.gui.security.LoginPanel;
-import edu.kwon.travelagent.fe.gui.user.UserTabSheet;
 
 /**
  * MainUI the application main page
@@ -42,12 +42,12 @@ public class MainUI extends AbstractUI {
 	
 	@PostConstruct
 	public void postConstruct() {
-		LOGIN_PANEL_NAME = LoginPanel.NAME;
+		LOGIN_PANEL_NAME = LoginPanel.VIEW_NAME;
 		WELCOME_PANEL_NAME = UserTabSheet.VIEW_NAME;
 		
 		DefaultErrorViewProvider errorViewProvider = new DefaultErrorViewProvider();
 		errorViewProvider.setErrorViewClass(LoginPanel.class);
-		errorViewProvider.setErrorViewName(LoginPanel.NAME);
+		errorViewProvider.setErrorViewName(LoginPanel.VIEW_NAME);
 		setErrorViewProvider(errorViewProvider);
 	}
 

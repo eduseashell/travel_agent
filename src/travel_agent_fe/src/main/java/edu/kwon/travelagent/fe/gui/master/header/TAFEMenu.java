@@ -33,7 +33,7 @@ public class TAFEMenu extends AbstractMenuBar {
 		MenuItem users = addItem(I18N.string("TAFEMenu.users"), null);
 		users.addItem(I18N.string("TAFEMenu.dashboard"), new MenuCommand(DashboardPanel.NAME));
 		
-		users.addItem("Open", new MenuCommand(LoginPanel.NAME));
+		users.addItem("Open", new MenuCommand(LoginPanel.VIEW_NAME));
 		users.addItem("Exit", new Command() {
 			
 			/** */

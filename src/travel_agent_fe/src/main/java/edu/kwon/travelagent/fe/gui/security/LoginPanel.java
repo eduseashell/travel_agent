@@ -29,11 +29,11 @@ import edu.kwon.travelagent.fe.gui.MainUI;
  */
 @Component
 @Scope("prototype")
-@VaadinView(LoginPanel.NAME)
+@VaadinView(LoginPanel.VIEW_NAME)
 public class LoginPanel extends DefaultLoginPanel {
 	
 	private static final long serialVersionUID = 6901879027592109979L;
-	public static final String NAME = "login";
+	public static final String VIEW_NAME = "login";
 
 	@Autowired
 	private AuthenticationService authService;
