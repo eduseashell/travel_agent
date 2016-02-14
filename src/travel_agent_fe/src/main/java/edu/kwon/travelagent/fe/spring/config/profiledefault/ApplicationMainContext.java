@@ -28,6 +28,10 @@ public class ApplicationMainContext {
 	
 	@Value(PropertiesParam.APP_MESSAGE_FILE_NAME)
 	private String message;
+	@Value(PropertiesParam.FRMK_MESSAGE_FILE_NAME)
+	private String frmkMessage;
+	@Value(PropertiesParam.CMN_MESSAGE_FILE_NAME)
+	private String cmnMessage;
 	
 	@Value(PropertiesParam.DEFAULT_LOCALE_LANGUAGE)
 	private String defaultLanguage;
@@ -47,7 +51,7 @@ public class ApplicationMainContext {
 	public MessageSource messageSource() {
 //		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename(message);
+		messageSource.setBasenames(message, frmkMessage, cmnMessage);
 //		messageSource.setCacheSeconds(1);
 		return messageSource;
 	}

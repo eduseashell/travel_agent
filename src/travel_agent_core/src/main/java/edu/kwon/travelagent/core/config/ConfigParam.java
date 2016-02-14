@@ -3,18 +3,11 @@ package edu.kwon.travelagent.core.config;
 public interface ConfigParam {
 	
 	// Application configuration
-	String APP_CONFIG_LOCATION_RAW = "application";
-	String APP_CONFIG_LOCATION = "classpath:" + APP_CONFIG_LOCATION_RAW;
-	String APP_PROPERTIES_EXT = ".properties";
-	String APP_CONFIG_PROPERTIES = APP_CONFIG_LOCATION + APP_PROPERTIES_EXT;
-	
+	String APP_CONFIG_PROPERTIES = "classpath:application.properties";
 	String APP_PROFILE_DEFAULT = "default";
-	String APP_PROFILE_DEV = "development";
-	String APP_PROFILE_PRO = "production";
-	
-	String APP_PROFILE_DEFAULT_PROPERTIES = APP_CONFIG_LOCATION + "-" + APP_PROFILE_DEFAULT + APP_PROPERTIES_EXT;
-	String APP_PROFILE_DEV_PROPERTIES = APP_CONFIG_LOCATION + "-" + APP_PROFILE_DEV + APP_PROPERTIES_EXT;
-	String APP_PROFILE_PRO_PROPERTIES = APP_CONFIG_LOCATION + "-" + APP_PROFILE_PRO + APP_PROPERTIES_EXT;
+	String APP_PROFILE_DEFAULT_PROPERTIES = "classpath:application-default.properties";
+	String APP_PROFILE_DEV_PROPERTIES = "classpath:application-development.properties";
+	String APP_PROFILE_PRO_PROPERTIES = "classpath:application-production.properties";
 	
 	String JPA_REPO_BASE_PACKAGE = "edu.kwon.frmk.common.data.jpa.repository";
 	String ENTITY_PACKAGE_TO_SCAN = JPA_REPO_BASE_PACKAGE;

@@ -11,6 +11,8 @@ public interface PropertiesParam {
 	
 	// App message base name
 	String APP_MESSAGE_FILE_NAME = "${app.message:message}";
+	String FRMK_MESSAGE_FILE_NAME = "${app.message.frmk:frmk-message}";
+	String CMN_MESSAGE_FILE_NAME = "${app.message.cmn:cmn-message}";
 	
 	// App common config
 	String DEFAULT_LOCALE_LANGUAGE = "${default.locale.language:en}";

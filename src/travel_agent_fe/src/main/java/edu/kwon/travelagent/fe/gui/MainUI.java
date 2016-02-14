@@ -14,6 +14,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import edu.kwon.frmk.vaadin.gui.main.AbstractUI;
 import edu.kwon.frmk.vaadin.gui.main.DefaultErrorViewProvider;
+import edu.kwon.frmk.vaadin.gui.main.DefaultPageNotFound;
 import edu.kwon.frmk.vaadin.gui.user.UserTabSheet;
 import edu.kwon.travelagent.core.vaadin.themes.TravelAgentTheme;
 import edu.kwon.travelagent.fe.gui.master.footer.BottomPanel;
@@ -46,8 +47,8 @@ public class MainUI extends AbstractUI {
 		WELCOME_PANEL_NAME = UserTabSheet.VIEW_NAME;
 		
 		DefaultErrorViewProvider errorViewProvider = new DefaultErrorViewProvider();
-		errorViewProvider.setErrorViewClass(LoginPanel.class);
-		errorViewProvider.setErrorViewName(LoginPanel.VIEW_NAME);
+		errorViewProvider.setErrorViewClass(DefaultPageNotFound.class);
+		errorViewProvider.setErrorViewName(DefaultPageNotFound.VIEW_NAME);
 		setErrorViewProvider(errorViewProvider);
 	}
 
